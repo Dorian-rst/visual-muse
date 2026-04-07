@@ -10,12 +10,15 @@ const Index = () => {
   return (
     <div className="min-h-screen scroll-smooth">
       <Navbar />
-      <div id="hero"><HeroSection /></div>
-      <div id="destinations"><HowItWorks /></div>
-      <div id="comparateur"><ComparatorSection /></div>
-      <div id="impact"><ImpactSection /></div>
-      <div id="hebergements"><LodgingSection /></div>
-      <div id="activites"><LodgingSection /></div>
+      <section id="hero"><HeroSection /></section>
+      <section id="destinations"><HowItWorks /></section>
+      <section id="comparateur"><ComparatorSection /></section>
+      <section id="impact"><ImpactSection /></section>
+      <section id="hebergements">
+        <div id="activites">
+          <LodgingSection />
+        </div>
+      </section>
       <Footer />
     </div>
   );
