@@ -151,7 +151,7 @@ const Navbar = () => {
                       onClick={() => {
                         setSearchOpen(false);
                         setSearchQuery("");
-                        scrollTo("destinations");
+                        navigate("/destinations");
                       }}
                       className="w-full flex items-start gap-4 px-6 py-4 hover:bg-accent/50 transition-colors text-left"
                     >
