@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Leaf, Search, X, MapPin } from "lucide-react";
 
 const navLinks = [
