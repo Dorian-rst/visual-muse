@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-forest.jpg";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -30,7 +31,7 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-base font-semibold hover:opacity-90 transition-opacity">
+          <button onClick={() => navigate("/destinations")} className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-base font-semibold hover:opacity-90 transition-opacity">
             Explorer les destinations
             <ArrowRight className="h-4 w-4" />
           </button>
