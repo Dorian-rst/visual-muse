@@ -6,8 +6,8 @@ const navLinks = [
   { label: "Accueil", target: "hero" },
   { label: "Comparateur", target: "comparateur" },
   { label: "Destinations", target: "destinations", route: "/destinations" },
-  { label: "Hébergements", target: "hebergements" },
-  { label: "Activités", target: "activites" },
+  { label: "Hébergements", target: "hebergements", route: "/hebergements" },
+  { label: "Activités", target: "activites", route: "/activites" },
 ];
 
 const destinations = [
