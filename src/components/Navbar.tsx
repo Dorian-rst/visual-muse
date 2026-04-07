@@ -22,6 +22,7 @@ const destinations = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showConnexion, setShowConnexion] = useState(false);
