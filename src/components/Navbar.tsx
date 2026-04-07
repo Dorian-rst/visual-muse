@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Leaf, Search, X, MapPin } from "lucide-react";
 
 const navLinks = [
   { label: "Accueil", target: "hero" },
   { label: "Comparateur", target: "comparateur" },
-  { label: "Destinations", target: "destinations" },
+  { label: "Destinations", target: "destinations", route: "/destinations" },
   { label: "Hébergements", target: "hebergements" },
   { label: "Activités", target: "activites" },
 ];
@@ -21,6 +22,7 @@ const destinations = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showConnexion, setShowConnexion] = useState(false);
@@ -52,7 +54,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => scrollTo(link.target)}
+                onClick={() => link.route ? navigate(link.route) : scrollTo(link.target)}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
@@ -149,7 +151,7 @@ const Navbar = () => {
                       onClick={() => {
                         setSearchOpen(false);
                         setSearchQuery("");
-                        scrollTo("destinations");
+                        navigate("/destinations");
                       }}
                       className="w-full flex items-start gap-4 px-6 py-4 hover:bg-accent/50 transition-colors text-left"
                     >
