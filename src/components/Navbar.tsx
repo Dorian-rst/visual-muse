@@ -5,7 +5,7 @@ import { Leaf, Search, X, MapPin } from "lucide-react";
 const navLinks = [
   { label: "Accueil", target: "hero" },
   { label: "Comparateur", target: "comparateur" },
-  { label: "Destinations", target: "destinations" },
+  { label: "Destinations", target: "destinations", route: "/destinations" },
   { label: "Hébergements", target: "hebergements" },
   { label: "Activités", target: "activites" },
 ];
