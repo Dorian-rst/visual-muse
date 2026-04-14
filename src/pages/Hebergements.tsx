@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, MapPin, Star, ArrowRight, ArrowLeft, Search, Wifi, Droplets, Zap, TreePine } from "lucide-react";
+import ReservationModal from "@/components/ReservationModal";
 
 import ecolodge1 from "@/assets/ecolodge-1.jpg";
 import ecolodge2 from "@/assets/ecolodge-2.jpg";
@@ -30,6 +31,7 @@ const amenityIcons: Record<string, { icon: typeof Wifi; label: string }> = {
 const Hebergements = () => {
   const [activeType, setActiveType] = useState("Tous");
   const [search, setSearch] = useState("");
+  const [selectedHeb, setSelectedHeb] = useState<typeof hebergements[0] | null>(null);
 
   const filtered = hebergements.filter((h) => {
     const matchType = activeType === "Tous" || h.type === activeType;
@@ -137,7 +139,10 @@ const Hebergements = () => {
 
                   <div className="flex items-center justify-between">
                     <p className="text-xl font-bold text-foreground">{h.price}<span className="text-sm font-normal text-muted-foreground">/nuit</span></p>
-                    <button className="flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity">
+                    <button
+                      onClick={() => setSelectedHeb(h)}
+                      className="flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
                       Réserver <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
@@ -147,6 +152,13 @@ const Hebergements = () => {
           </div>
         )}
       </div>
+
+      <ReservationModal
+        isOpen={!!selectedHeb}
+        onClose={() => setSelectedHeb(null)}
+        item={selectedHeb ? { name: selectedHeb.name, price: selectedHeb.price, location: selectedHeb.location, image: selectedHeb.image } : { name: "", price: "0€", location: "", image: "" }}
+        type="hébergement"
+      />
     </div>
   );
 };
