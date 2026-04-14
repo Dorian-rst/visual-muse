@@ -26,6 +26,7 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showConnexion, setShowConnexion] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const filteredDestinations = destinations.filter(
     (d) =>
