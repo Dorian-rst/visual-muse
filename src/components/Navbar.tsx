@@ -73,18 +73,55 @@ const Navbar = () => {
             </button>
             <button
               onClick={() => setShowConnexion(!showConnexion)}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              className="hidden md:block text-sm font-medium text-foreground hover:text-primary transition-colors"
             >
               Connexion
             </button>
             <button
-              onClick={() => scrollTo("hero")}
-              className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
+              onClick={() => navigate("/destinations")}
+              className="hidden md:block bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
             >
               Commencer
             </button>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+              aria-label="Menu"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
+            <div className="container mx-auto px-4 py-4 space-y-2">
+              {navLinks.map((link) => (
+                <button
+                  key={link.label}
+                  onClick={() => {
+                    if (link.route) {
+                      navigate(link.route);
+                    } else {
+                      scrollTo(link.target);
+                    }
+                    setMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-foreground hover:bg-accent transition-colors"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <button
+                onClick={() => { setShowConnexion(true); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-primary hover:bg-accent transition-colors"
+              >
+                Connexion
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Connexion Modal */}
