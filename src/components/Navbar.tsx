@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Leaf, Search, X, MapPin } from "lucide-react";
+import { Leaf, Search, X, MapPin, Menu } from "lucide-react";
 
 const navLinks = [
   { label: "Accueil", target: "hero" },
