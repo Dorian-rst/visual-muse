@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, MapPin, Star, ArrowRight, ArrowLeft, Search, Clock, Users, Zap } from "lucide-react";
+import ReservationModal from "@/components/ReservationModal";
 
 import actRandonnee from "@/assets/act-randonnee.jpg";
 import actSnorkeling from "@/assets/act-snorkeling.jpg";
@@ -27,6 +28,7 @@ const activities = [
 const Activites = () => {
   const [activeCategory, setActiveCategory] = useState("Toutes");
   const [search, setSearch] = useState("");
+  const [selectedActivity, setSelectedActivity] = useState<typeof activities[0] | null>(null);
 
   const filtered = activities.filter((a) => {
     const matchCat = activeCategory === "Toutes" || a.category === activeCategory;
@@ -116,7 +118,10 @@ const Activites = () => {
 
                   <div className="flex items-center justify-between">
                     <p className="text-xl font-bold text-foreground">{act.price}<span className="text-sm font-normal text-muted-foreground">/pers.</span></p>
-                    <button className="flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity">
+                    <button
+                      onClick={() => setSelectedActivity(act)}
+                      className="flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
                       Réserver <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
@@ -126,6 +131,13 @@ const Activites = () => {
           </div>
         )}
       </div>
+
+      <ReservationModal
+        isOpen={!!selectedActivity}
+        onClose={() => setSelectedActivity(null)}
+        item={selectedActivity ? { name: selectedActivity.name, price: selectedActivity.price, location: selectedActivity.location, image: selectedActivity.image } : { name: "", price: "0€", location: "", image: "" }}
+        type="activité"
+      />
     </div>
   );
 };
