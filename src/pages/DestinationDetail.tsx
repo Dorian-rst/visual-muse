@@ -114,11 +114,17 @@ const DestinationDetail = () => {
                 </div>
               </div>
 
-              <button
-                onClick={() => setShowReservation(true)}
+              <Link
+                to={`/planifier/${dest.slug}`}
                 className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
-                Réserver cette destination <ArrowRight className="h-4 w-4" />
+                Composer mon voyage bas-carbone <ArrowRight className="h-4 w-4" />
+              </Link>
+              <button
+                onClick={() => setShowReservation(true)}
+                className="w-full border border-border py-3 rounded-xl font-semibold text-sm hover:bg-accent transition-colors flex items-center justify-center gap-2"
+              >
+                Réserver directement
               </button>
             </div>
 

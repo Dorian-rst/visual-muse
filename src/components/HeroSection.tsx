@@ -31,12 +31,12 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button onClick={() => navigate("/destinations")} className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-base font-semibold hover:opacity-90 transition-opacity">
-            Explorer les destinations
+          <button onClick={() => navigate("/planifier")} className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full text-base font-semibold hover:opacity-90 transition-opacity">
+            Planifier mon voyage bas-carbone
             <ArrowRight className="h-4 w-4" />
           </button>
-          <button className="flex items-center gap-2 border border-earth-cream/40 text-earth-cream px-8 py-3.5 rounded-full text-base font-medium hover:bg-earth-cream/10 transition-colors">
-            En savoir plus
+          <button onClick={() => navigate("/destinations")} className="flex items-center gap-2 border border-earth-cream/40 text-earth-cream px-8 py-3.5 rounded-full text-base font-medium hover:bg-earth-cream/10 transition-colors">
+            Explorer les destinations
           </button>
         </div>
       </div>
