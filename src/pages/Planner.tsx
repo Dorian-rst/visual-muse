@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Leaf, ArrowLeft, Search, Train, Bus, Plane, Car, Award, Star, Clock, Euro, ArrowRight, Sparkles, MapPin, Check } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { destinations } from "@/data/destinations";
@@ -22,11 +22,20 @@ const scoreColor = (s: string) =>
   "bg-muted text-muted-foreground";
 
 const Planner = () => {
+  const { slug: routeSlug } = useParams();
   const [query, setQuery] = useState("");
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [nights, setNights] = useState(5);
   const [co2Budget, setCo2Budget] = useState(2500);
   const [selectedCombo, setSelectedCombo] = useState<TripCombo | null>(null);
+
+  useEffect(() => {
+    if (routeSlug && destinations.find((d) => d.slug === routeSlug)) {
+      setSelectedSlug(routeSlug);
+      const combos = buildCombos(routeSlug, 5);
+      if (combos.length > 0) setCo2Budget(combos[combos.length - 1].totalCo2);
+    }
+  }, [routeSlug]);
 
   const matches = useMemo(() => searchDestinations(query), [query]);
   const selectedDest = useMemo(
