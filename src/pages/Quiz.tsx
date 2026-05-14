@@ -94,7 +94,7 @@ const Quiz = () => {
   const back = () => step > 0 && setStep(step - 1);
 
   const canNext = () => {
-    if (step === 0) return memory.trim().length > 0;
+    if (step === 0) return memory.length > 0;
     if (step === 1) return Number(budgetMin) > 0 && Number(budgetMax) >= Number(budgetMin);
     if (step === 2) return people.every((p) => Number(p.age) > 0);
     return true;
