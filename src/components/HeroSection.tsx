@@ -1,4 +1,4 @@
-import { ArrowRight, Leaf, Globe } from "lucide-react";
+import { ArrowRight, Leaf, Globe, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-forest.jpg";
 
