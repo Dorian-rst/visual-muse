@@ -17,7 +17,18 @@ type Trip = {
   ecoScore: "A+" | "A";
 };
 
-const buildTrips = (memory: string, budgetMin: number, budgetMax: number, people: Person[], comfort: number): Trip[] => {
+const MEMORY_OPTIONS = [
+  { id: "nature", label: "Communion avec la nature", emoji: "🌿" },
+  { id: "rencontres", label: "Rencontres locales", emoji: "🤝" },
+  { id: "aventure", label: "Sensations & aventure", emoji: "🧗" },
+  { id: "deconnexion", label: "Déconnexion totale", emoji: "🧘" },
+  { id: "culture", label: "Immersion culturelle", emoji: "🏛️" },
+  { id: "gastronomie", label: "Saveurs & gastronomie", emoji: "🍷" },
+  { id: "faune", label: "Observation de la faune", emoji: "🐋" },
+  { id: "contemplation", label: "Paysages à couper le souffle", emoji: "🏔️" },
+];
+
+const buildTrips = (memory: string[], budgetMin: number, budgetMax: number, people: Person[], comfort: number): Trip[] => {
   const avg = (budgetMin + budgetMax) / 2 || 800;
   const n = Math.max(people.length, 1);
   const base = Math.round(avg);
@@ -62,7 +73,7 @@ const buildTrips = (memory: string, budgetMin: number, budgetMax: number, people
 const Quiz = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [memory, setMemory] = useState("");
+  const [memory, setMemory] = useState<string[]>([]);
   const [budgetMin, setBudgetMin] = useState("500");
   const [budgetMax, setBudgetMax] = useState("1500");
   const [people, setPeople] = useState<Person[]>([{ age: "" }]);
@@ -83,7 +94,7 @@ const Quiz = () => {
   const back = () => step > 0 && setStep(step - 1);
 
   const canNext = () => {
-    if (step === 0) return memory.trim().length > 0;
+    if (step === 0) return memory.length > 0;
     if (step === 1) return Number(budgetMin) > 0 && Number(budgetMax) >= Number(budgetMin);
     if (step === 2) return people.every((p) => Number(p.age) > 0);
     return true;
@@ -185,14 +196,35 @@ const Quiz = () => {
             {step === 0 && (
               <div>
                 <h2 className="text-2xl font-serif font-bold text-foreground mb-2">Quels types de souvenirs voulez-vous créer ?</h2>
-                <p className="text-sm text-muted-foreground mb-6">Décrivez avec vos mots l'expérience qui vous ferait rêver.</p>
-                <textarea
-                  value={memory}
-                  onChange={(e) => setMemory(e.target.value)}
-                  placeholder="Ex : observer une aurore boréale en silence, partager un repas avec une famille locale, dormir dans la canopée…"
-                  rows={6}
-                  className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
-                />
+                <p className="text-sm text-muted-foreground mb-6">Choisissez jusqu'à 3 envies. ({memory.length}/3)</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {MEMORY_OPTIONS.map((opt) => {
+                    const selected = memory.includes(opt.id);
+                    const disabled = !selected && memory.length >= 3;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() =>
+                          setMemory((prev) =>
+                            prev.includes(opt.id) ? prev.filter((x) => x !== opt.id) : [...prev, opt.id]
+                          )
+                        }
+                        className={`flex items-center gap-3 text-left px-4 py-3 rounded-lg border text-sm font-medium transition-all ${
+                          selected
+                            ? "border-primary bg-primary/10 text-foreground"
+                            : disabled
+                            ? "border-border bg-background text-muted-foreground opacity-50 cursor-not-allowed"
+                            : "border-border bg-background text-foreground hover:border-primary/50 hover:bg-accent/50"
+                        }`}
+                      >
+                        <span className="text-xl">{opt.emoji}</span>
+                        <span>{opt.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
 
