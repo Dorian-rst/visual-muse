@@ -196,14 +196,35 @@ const Quiz = () => {
             {step === 0 && (
               <div>
                 <h2 className="text-2xl font-serif font-bold text-foreground mb-2">Quels types de souvenirs voulez-vous créer ?</h2>
-                <p className="text-sm text-muted-foreground mb-6">Décrivez avec vos mots l'expérience qui vous ferait rêver.</p>
-                <textarea
-                  value={memory}
-                  onChange={(e) => setMemory(e.target.value)}
-                  placeholder="Ex : observer une aurore boréale en silence, partager un repas avec une famille locale, dormir dans la canopée…"
-                  rows={6}
-                  className="w-full border border-border rounded-lg px-4 py-3 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
-                />
+                <p className="text-sm text-muted-foreground mb-6">Choisissez jusqu'à 3 envies. ({memory.length}/3)</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {MEMORY_OPTIONS.map((opt) => {
+                    const selected = memory.includes(opt.id);
+                    const disabled = !selected && memory.length >= 3;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        disabled={disabled}
+                        onClick={() =>
+                          setMemory((prev) =>
+                            prev.includes(opt.id) ? prev.filter((x) => x !== opt.id) : [...prev, opt.id]
+                          )
+                        }
+                        className={`flex items-center gap-3 text-left px-4 py-3 rounded-lg border text-sm font-medium transition-all ${
+                          selected
+                            ? "border-primary bg-primary/10 text-foreground"
+                            : disabled
+                            ? "border-border bg-background text-muted-foreground opacity-50 cursor-not-allowed"
+                            : "border-border bg-background text-foreground hover:border-primary/50 hover:bg-accent/50"
+                        }`}
+                      >
+                        <span className="text-xl">{opt.emoji}</span>
+                        <span>{opt.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
 
