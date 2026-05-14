@@ -10,6 +10,7 @@ import Activites from "./pages/Activites.tsx";
 import ActivityDetail from "./pages/ActivityDetail.tsx";
 import Hebergements from "./pages/Hebergements.tsx";
 import Planner from "./pages/Planner.tsx";
+import Quiz from "./pages/Quiz.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/hebergements" element={<Hebergements />} />
           <Route path="/planifier" element={<Planner />} />
           <Route path="/planifier/:slug" element={<Planner />} />
+          <Route path="/quiz" element={<Quiz />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

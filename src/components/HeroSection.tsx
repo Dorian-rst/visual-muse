@@ -1,4 +1,4 @@
-import { ArrowRight, Leaf, Globe } from "lucide-react";
+import { ArrowRight, Leaf, Globe, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-forest.jpg";
 
@@ -39,6 +39,15 @@ const HeroSection = () => {
             Explorer les destinations
           </button>
         </div>
+
+        <button
+          onClick={() => navigate("/quiz")}
+          className="mt-6 inline-flex items-center gap-2 bg-earth-cream/10 backdrop-blur-sm border border-earth-sage/40 text-earth-cream px-6 py-3 rounded-full text-sm font-medium hover:bg-earth-cream/20 transition-colors"
+        >
+          <Sparkles className="h-4 w-4 text-earth-sage" />
+          Passez votre test de personnalité voyageur
+          <ArrowRight className="h-4 w-4" />
+        </button>
       </div>
 
       <Leaf className="absolute left-8 top-1/3 h-16 w-16 text-earth-sage/20" />
