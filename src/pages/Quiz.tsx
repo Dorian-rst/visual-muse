@@ -17,7 +17,18 @@ type Trip = {
   ecoScore: "A+" | "A";
 };
 
-const buildTrips = (memory: string, budgetMin: number, budgetMax: number, people: Person[], comfort: number): Trip[] => {
+const MEMORY_OPTIONS = [
+  { id: "nature", label: "Communion avec la nature", emoji: "🌿" },
+  { id: "rencontres", label: "Rencontres locales", emoji: "🤝" },
+  { id: "aventure", label: "Sensations & aventure", emoji: "🧗" },
+  { id: "deconnexion", label: "Déconnexion totale", emoji: "🧘" },
+  { id: "culture", label: "Immersion culturelle", emoji: "🏛️" },
+  { id: "gastronomie", label: "Saveurs & gastronomie", emoji: "🍷" },
+  { id: "faune", label: "Observation de la faune", emoji: "🐋" },
+  { id: "contemplation", label: "Paysages à couper le souffle", emoji: "🏔️" },
+];
+
+const buildTrips = (memory: string[], budgetMin: number, budgetMax: number, people: Person[], comfort: number): Trip[] => {
   const avg = (budgetMin + budgetMax) / 2 || 800;
   const n = Math.max(people.length, 1);
   const base = Math.round(avg);
