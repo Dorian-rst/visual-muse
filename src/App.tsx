@@ -10,6 +10,7 @@ import Activites from "./pages/Activites.tsx";
 import ActivityDetail from "./pages/ActivityDetail.tsx";
 import Hebergements from "./pages/Hebergements.tsx";
 import Planner from "./pages/Planner.tsx";
+import Quiz from "./pages/Quiz.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
