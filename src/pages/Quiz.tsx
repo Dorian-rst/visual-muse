@@ -62,7 +62,7 @@ const buildTrips = (memory: string, budgetMin: number, budgetMax: number, people
 const Quiz = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  const [memory, setMemory] = useState("");
+  const [memory, setMemory] = useState<string[]>([]);
   const [budgetMin, setBudgetMin] = useState("500");
   const [budgetMax, setBudgetMax] = useState("1500");
   const [people, setPeople] = useState<Person[]>([{ age: "" }]);
